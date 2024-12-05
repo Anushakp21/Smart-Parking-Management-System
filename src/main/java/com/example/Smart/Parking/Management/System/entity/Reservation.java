@@ -1,15 +1,14 @@
 package com.example.Smart.Parking.Management.System.entity;
 
+import com.example.Smart.Parking.Management.System.enums.ReservationStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class Reservation {
     @JsonIgnore
     private User user;
 
-    @OneToOne(mappedBy = "reservation" )
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
     private Bill bill;
 
     @OneToOne
@@ -47,4 +46,6 @@ public class Reservation {
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
+
+    private String vehicleType;
 }

@@ -19,4 +19,12 @@ public class ExceptionHandlerAdvice {
     public ResponseEntity<String> reservation(ReservationConflictException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(BillNotFoundExceptionOrExists.class)
+    public ResponseEntity<String> billNotFound(ReservationConflictException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(PaymentAlreadyCompletedException.class)
+    public ResponseEntity<String> handlePaymentAlreadyCompletedException(PaymentAlreadyCompletedException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
 }

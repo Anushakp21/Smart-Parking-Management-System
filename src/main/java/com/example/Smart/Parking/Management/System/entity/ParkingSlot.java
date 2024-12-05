@@ -1,5 +1,6 @@
 package com.example.Smart.Parking.Management.System.entity;
 
+import com.example.Smart.Parking.Management.System.enums.VehicleType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

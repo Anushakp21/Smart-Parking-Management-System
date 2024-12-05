@@ -1,8 +1,9 @@
 package com.example.Smart.Parking.Management.System.controller;
 
 import com.example.Smart.Parking.Management.System.dto.ParkingSlotDTO;
-import com.example.Smart.Parking.Management.System.service.ParkingSlotService;
-import com.example.Smart.Parking.Management.System.service.ParkingSlotServiceImpl;
+import com.example.Smart.Parking.Management.System.entity.ParkingSlot;
+import com.example.Smart.Parking.Management.System.enums.VehicleType;
+import com.example.Smart.Parking.Management.System.serviceiml.ParkingSlotServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,22 @@ public class ParkingSlotController {
     public ResponseEntity<String> releaseSlot(@PathVariable Long id) {
         parkingSlotService.releaseSlot(id);
         return ResponseEntity.ok("Slot released successfully!");
+    }
+    @GetMapping("/filter")
+    public List<ParkingSlot> filterSlots(
+            @RequestParam(required = false) Integer level,
+            @RequestParam(required = false) VehicleType vehicleType) {
+
+        if (level != null && vehicleType != null) {
+            return parkingSlotService.getSlotsByLevelAndVehicleType(level, vehicleType);
+        } else if (level != null) {
+            return parkingSlotService.getSlotsByLevel(level);
+        } else if (vehicleType != null) {
+            return parkingSlotService.getSlotsByVehicleType(vehicleType);
+        }
+        else
+        {
+            return null;
+        }
     }
 }

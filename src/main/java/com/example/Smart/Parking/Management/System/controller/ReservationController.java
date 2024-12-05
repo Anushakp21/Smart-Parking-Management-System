@@ -2,11 +2,13 @@ package com.example.Smart.Parking.Management.System.controller;
 
 import com.example.Smart.Parking.Management.System.dto.ReservationDTO;
 import com.example.Smart.Parking.Management.System.entity.Reservation;
-import com.example.Smart.Parking.Management.System.service.ReservationServiceImpl;
+import com.example.Smart.Parking.Management.System.serviceiml.ReservationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
@@ -27,9 +29,8 @@ public class ReservationController {
         return new ResponseEntity<>(canceledReservation, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservationDetails(@PathVariable Long id) {
-        Reservation reservation = reservationService.getReservationDetails(id);
-        return new ResponseEntity<>(reservation, HttpStatus.OK);
+    @GetMapping
+    public List<ReservationDTO> getReservationDetails() {
+       return reservationService.getReservationDetails();
     }
 }

@@ -1,8 +1,7 @@
 package com.example.Smart.Parking.Management.System.controller;
 
 import com.example.Smart.Parking.Management.System.dto.UserDTO;
-import com.example.Smart.Parking.Management.System.service.UserService;
-import com.example.Smart.Parking.Management.System.service.UserServiceImpl;
+import com.example.Smart.Parking.Management.System.serviceiml.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +27,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
+
         return ResponseEntity.ok(userService.getAllUsers());
     }
 

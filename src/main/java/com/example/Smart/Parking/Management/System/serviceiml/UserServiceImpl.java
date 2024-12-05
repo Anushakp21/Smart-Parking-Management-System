@@ -1,9 +1,10 @@
-package com.example.Smart.Parking.Management.System.service;
+package com.example.Smart.Parking.Management.System.serviceiml;
 
 import com.example.Smart.Parking.Management.System.dto.UserDTO;
 import com.example.Smart.Parking.Management.System.entity.User;
 import com.example.Smart.Parking.Management.System.handler.UserNotFoundException;
 import com.example.Smart.Parking.Management.System.repository.UserRepository;
+import com.example.Smart.Parking.Management.System.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

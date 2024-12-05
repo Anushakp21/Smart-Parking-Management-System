@@ -24,9 +24,6 @@ public class User {
 
     private String phone;
 
-    @OneToMany(mappedBy ="user",cascade = CascadeType.ALL)
-    private List<Reservation> reservations;
-
     @ElementCollection
     @CollectionTable(name = "user_registered_vehicles", joinColumns = @JoinColumn(name = "user_id"))
     @JsonIgnore

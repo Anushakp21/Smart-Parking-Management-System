@@ -1,9 +1,11 @@
-package com.example.Smart.Parking.Management.System.service;
+package com.example.Smart.Parking.Management.System.serviceiml;
 
 import com.example.Smart.Parking.Management.System.dto.ParkingSlotDTO;
 import com.example.Smart.Parking.Management.System.entity.ParkingSlot;
+import com.example.Smart.Parking.Management.System.enums.VehicleType;
 import com.example.Smart.Parking.Management.System.handler.SlotUnavailableException;
 import com.example.Smart.Parking.Management.System.repository.ParkingSlotRepository;
+import com.example.Smart.Parking.Management.System.service.ParkingSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
-public class ParkingSlotServiceImpl implements ParkingSlotService{
+public class ParkingSlotServiceImpl implements ParkingSlotService {
 
     @Autowired
     ParkingSlotRepository parkingSlotRepository;
@@ -62,11 +64,26 @@ public class ParkingSlotServiceImpl implements ParkingSlotService{
         parkingSlot.setSlotNumber(parkingSlotDTO.getSlotNumber());
         parkingSlot.setLevel(parkingSlotDTO.getLevel());
         parkingSlot.setVehicleType(parkingSlotDTO.getVehicleType());
+        parkingSlot.setIsAvailable(parkingSlotDTO.getIsAvailable());
         if(getParkingSlot==null) {
             parkingSlotRepository.save(parkingSlot);
             return parkingSlotDTO;
         }
         else
-            throw new IllegalArgumentException("Slot number "+parkingSlot.getSlotNumber()+" already exists");
+            throw new SlotUnavailableException("Slot number "+parkingSlot.getSlotNumber()+" already exists");
+    }
+    // Filter by level and vehicle type
+    public List<ParkingSlot> getSlotsByLevelAndVehicleType(int level, VehicleType vehicleType) {
+        return parkingSlotRepository.findByLevelAndVehicleType(level, vehicleType);
+    }
+
+    // Filter by level only
+    public List<ParkingSlot> getSlotsByLevel(int level) {
+        return parkingSlotRepository.findByLevel(level);
+    }
+
+    // Filter by vehicle type only
+    public List<ParkingSlot> getSlotsByVehicleType(VehicleType vehicleType) {
+        return parkingSlotRepository.findByVehicleType(vehicleType);
     }
 }

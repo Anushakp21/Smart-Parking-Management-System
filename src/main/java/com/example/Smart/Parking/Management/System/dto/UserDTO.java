@@ -10,14 +10,12 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserDTO {
     private Long id;
     private String name;
     private String email;
     private String phone;
     private List<String> registeredVehicles;
-    private List<Reservation> reservations;
 
 
     public UserDTO(Long id, String name, String email, String phone, List<String> registeredVehicles) {
